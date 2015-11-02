@@ -26,23 +26,37 @@ function medianScore(scoreArr) {
     return a-b;
   });
   if (sortedScores.length % 2 === 0){
+    return (sortedScores[sortedScores.length / 2] + sortedScores[((sortedScores.length / 2) - 1)])/2;
   } else {
     return (sortedScores[Math.floor(sortedScores.length/2)]);
   }
 }
 
 function modeScore(scoreArr) {
-  return scoreArr.sort(function(a,b){
-    return scoreArr.filter(function(v){
-      return v===a })
-      .length - scoreArr.filter(function(v){
-        return v===b })
-        .length}).pop();
-      }
+  var appears, mode, maxNum;
+  appears = {};
+  mode = [];
+  maxNum = 0;
 
-      module.exports = {
-        letterGrader:letterGrader,
-        averageScore:averageScore,
-        medianScore:medianScore,
-        modeScore:modeScore
-      };
+  for (var i in scoreArr) {
+    if (!(scoreArr[i] in appears))
+    appears[scoreArr[i]] = 1;
+    appears[scoreArr[i]]++;
+
+    if (appears[scoreArr[i]] == maxNum)
+    mode.push(scoreArr[i]);
+
+    else if (appears[scoreArr[i]] > maxNum) {
+      maxNum = appears[scoreArr[i]];
+      mode = [scoreArr[i]];
+    }
+  }
+  return mode;
+}
+
+module.exports = {
+  letterGrader:letterGrader,
+  averageScore:averageScore,
+  medianScore:medianScore,
+  modeScore:modeScore
+};
