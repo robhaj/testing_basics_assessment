@@ -41,11 +41,10 @@ function modeScore(scoreArr) {
   for (var i in scoreArr) {
     if (!(scoreArr[i] in appears))
     appears[scoreArr[i]] = 1;
+    else
     appears[scoreArr[i]]++;
-
     if (appears[scoreArr[i]] == maxNum)
     mode.push(scoreArr[i]);
-
     else if (appears[scoreArr[i]] > maxNum) {
       maxNum = appears[scoreArr[i]];
       mode = [scoreArr[i]];
